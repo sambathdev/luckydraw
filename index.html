@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Lucky Draw</title>
+
+  <style>
+    @font-face {
+      font-family: "Merri";
+      src: url("./fonts/Merriweather-Regular.ttf");
+    }
+    .bodybg{
+      background-image: url('./img/background.png');
+      background-size: cover;
+      background-repeat: none;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    *{
+      margin: 0;
+      padding: 0;
+      font-family: 'Merri', serif;
+    }
+    .container{
+      width: 80%;
+      margin: auto;
+      /* background: rgba(129, 128, 128, 0.5); */
+    }
+    .number{
+      display: block;
+      width: 150px;
+      /* background: red; */
+      float: left;
+      margin: 1px;
+    }
+    .trnumber{
+      opacity: 0.5;
+    }
+    .trnumber p{
+      opacity: 0.5;
+      font-size: 70px !important;
+      color: white;
+    }
+    .number p{
+      text-align: center;
+      font-size: 150px;
+      color: white;
+    }
+    .flex-item{
+      display: flex;
+    }
+    .to-float{
+      margin: auto;
+    }
+    #hisselect p{
+      font-size: 50px;
+    }
+    #run{
+      font-size: 50px;
+      text-align: center;
+      -moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;
+      cursor: pointer;
+      display: block;
+      width: 200px;
+      margin: auto;
+      margin-top: 20px;
+    }
+    .bgrun{
+      background: rgb(34, 192, 255);
+    }
+    .bgstop{
+      background: rgb(255, 251, 0);;
+    }
+    .hisheight{
+      min-height: 500px;
+      display: none;
+    }
+    .title h1{
+      font-size: 70px;
+      padding: 270px 0 10px 0;
+      text-align: center;
+      color: white;
+    }
+    #historyselection{
+      color: white;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bodybg">
+    <p>s</p>
+  </div>
+  <div class="title">
+    <p id="demo"></p>
+    <div class="container">
+      <h1>Lucky Draw</h1>
+    </div>
+
+
+  </div>
+  <div>
+    <div class="container">
+      <div class="flex-item">
+        <div class="to-float">
+          <div class="number trnumber">
+            <p id="n1up">9</p>
+          </div>
+          <div class="number trnumber">
+            <p id="n2up">9</p>
+          </div>
+          <div class="number trnumber">
+            <p id="n3up">9</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex-item">
+        <div class="to-float">
+          <div class="number">
+            <p id="n1">0</p>
+          </div>
+          <div class="number">
+            <p id="n2">0</p>
+          </div>
+          <div class="number">
+            <p id="n3">0</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex-item">
+        <div class="to-float">
+          <div class="number trnumber">
+            <p id="n1down">1</p>
+          </div>
+          <div class="number trnumber">
+            <p id="n2down">1</p>
+          </div>
+          <div class="number trnumber">
+            <p id="n3down">1</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div>
+          <p id="run" class="bgrun">Run</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container hisheight">
+      <h1 id="historyselection">Winners</h1>
+      <div id="hisselect">
+        <!-- <p>122</p> -->
+      </div>
+    </div>
+
+  </div>
+
+
+  <script>
+    var n1;
+    var n2;
+    var n3;
+
+    function runrand(){
+      n1 = Math.floor(Math.random()*2);
+      n2 = Math.floor(Math.random()*10);
+      n3 = Math.floor(Math.random()*10);
+      document.getElementById('n1').innerHTML = n1;
+      document.getElementById('n2').innerHTML = n2;
+      document.getElementById('n3').innerHTML = n3;
+      
+      let n1up = n1-1;
+      let n2up = n2-1;
+      let n3up = n3-1;
+      if(n1 == 0){
+        n1up = 9;
+      }
+      if(n2 == 0){
+        n2up = 9;
+      }
+      if(n3 == 0){
+        n3up = 9;
+      }
+
+      let n1down = n1+1;
+      let n2down = n2+1;
+      let n3down = n3+1;
+      if(n1 == 9){
+        n1down = 0;
+      }
+      if(n2 == 9){
+        n2down = 0;
+      }
+      if(n3 == 9){
+        n3down = 0;
+      }
+
+      document.getElementById('n1up').innerHTML = n1up;
+      document.getElementById('n2up').innerHTML = n2up;
+      document.getElementById('n3up').innerHTML = n3up;
+
+      document.getElementById('n1down').innerHTML = n1down;
+      document.getElementById('n2down').innerHTML = n2down;
+      document.getElementById('n3down').innerHTML = n3down;
+
+
+
+
+    }
+
+    // window.addEventListener('mousemove',function(e){
+    //   var x = e.clientX;
+    //   var y = e.clientY;
+    //   var c1 = 255 - ((1920-x)/1920)*255;
+    //   var c2 = 255 - ((1920-y)/1920)*255;
+    //   var c3 = 255 - ((1920-x)/1920)*255;
+    //   document.getElementById("historyselection").style.background = "rgb("+c1+", "+c2+", "+c3+")";
+    // });
+
+
+    
+    var status = "notrunning";
+    var x;
+    var historynum = [];
+    var numorder = 0;
+    document.getElementById('run').addEventListener('click', function(){
+      if(status == "running"){
+        clearInterval(x);
+        status = "notrunning";
+        document.getElementById('run').innerHTML = "Run";
+        var numaddtohistory = String(n1)+String(n2)+String(n3);
+        historynum.push(numaddtohistory);
+        let newhis = document.createElement("p");
+        numorder++;
+        newhis.innerHTML = numorder+ "/ " + numaddtohistory;
+        var randc1 = Math.floor(Math.random()*255);
+        var randc2 = Math.floor(Math.random()*255);
+        var randc3 = Math.floor(Math.random()*255);
+        newhis.style.color = "rgb("+randc1+", "+randc2+", "+randc3+")";
+        document.getElementById('hisselect').appendChild(newhis);
+        document.getElementById("run").className = "bgrun";
+      }else if(status == "notrunning"){
+        x = setInterval(runrand, 10);
+        status = "running";
+        document.getElementById('run').innerHTML = "Stop";
+        document.getElementById("run").className = "bgstop";
+      }
+    });
+  </script>
+
+</body>
+</html>
